@@ -32,13 +32,6 @@ Create Table Opiniones(
 -- drop Table Opiniones;
 
 
-INSERT INTO Usuarios (correo, clave, nombre_Usuario) VALUES
-('correo@ejemplo.com', 'clave1', 'usuario1');
-
-
-INSERT INTO Usuarios (correo, clave, nombre_Usuario) VALUES
-('correo2@ejemplo.com', 'clave2', 'usuario2');
-
 Select * from Usuarios;
 
 Select * from Libros;
@@ -46,22 +39,7 @@ Select * from Libros;
 Select * from Opiniones Order By Opiniones.libro_Id;
 
 
--- Usuario y Opinion
-Select l.titulo, l.resumen, l.autor, l.categoria, u.nombre_Usuario, 
-u.correo, o.comentario, o.calificacion, o.fecha_Opinion
-From Usuarios u JOIN Opiniones o ON u.usuario_Id=o.usuario_Id
-JOIN Libros l ON o.libro_Id=l.libro_Id
-Where u.usuario_Id=4;
-
--- Libro y Opiniones
-Select l.titulo, l.resumen, l.autor, l.categoria, u.nombre_Usuario, u.correo, o.comentario, o.calificacion, o.fecha_Opinion
-From Libros l INNER JOIN Opiniones o ON l.libro_Id=o.libro_Id
-INNER JOIN Usuarios u ON o.usuario_Id=u.usuario_Id
-Where l.libro_Id=8;
-
-
--- Insertar datos en la tabla Libros
--- Insertar datos en la tabla Libros
+-- Datos ejemplo para la tabla Libros
 INSERT INTO Libros (titulo, autor, categoria, resumen)
 VALUES
     ('Cien años de soledad', 'Gabriel García Márquez', 'Ficción', 'La novela narra la historia de la familia Buendía a lo largo de siete generaciones en el ficticio pueblo de Macondo. A través de realismo mágico, García Márquez teje una trama en la que lo extraordinario se mezcla con lo cotidiano.'),
@@ -103,20 +81,3 @@ VALUES
     ('El retrato de Dorian Gray', 'Oscar Wilde', 'Ficción', 'Dorian Gray, un joven apuesto, vende su alma para preservar su belleza mientras su retrato envejece. La novela explora la decadencia moral y la búsqueda obsesiva de la juventud eterna.'),
     
     ('El nombre de la rosa', 'Umberto Eco', 'Misterio', 'En una abadía medieval, el monje Guillermo de Baskerville investiga una serie de misteriosos asesinatos. La novela combina el thriller histórico con la reflexión sobre la naturaleza del conocimiento y la fe.');
-
-
--- Insertar datos en la tabla Opiniones
-INSERT INTO Opiniones (usuario_Id, libro_Id, calificacion, comentario, fecha_Opinion)
-VALUES
-    (4, 1, 4, 'Me encantó la trama y los personajes. Altamente recomendado.', CURRENT_TIMESTAMP),
-    
-    (5, 8, 5, 'Una obra maestra. No puedo dejar de pensar en ella.', CURRENT_TIMESTAMP),
-    
-    (7, 15, 3, 'Buena historia, pero esperaba más desarrollo de personajes.', CURRENT_TIMESTAMP),
-    
-    (4, 12, 2, 'Fascinante exploración del poder y la corrupción.', CURRENT_TIMESTAMP),
-
-	(8, 8, 3, 'Me gustó demasiado el plot', CURRENT_TIMESTAMP),
-    
-    (5, 19, 1, 'No era lo que esperaba. La trama se sintió forzada.', CURRENT_TIMESTAMP);
-
