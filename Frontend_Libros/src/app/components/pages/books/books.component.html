@@ -1,0 +1,71 @@
+<div class="container">
+  <nav class="navbar navbar-light bg-light">
+    <form class="form-inline" (ngSubmit)="searchBooks()">
+      <input class="form-control mr-sm-2" type="search" placeholder="Buscar libro" aria-label="Buscar" [(ngModel)]="searchTerm" name="searchTerm">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+    </form>
+  </nav>
+  @for (book of bookAndOpinion; track book.book.libro_Id) {
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-preview">
+          <h2 class="post-title">
+            {{ book.book.titulo }}
+          </h2>
+          <h3 class="post-subtitle">
+            {{ book.book.resumen }}
+          </h3>
+          <p class="post-meta">{{ book.book.autor }}</p>
+          <p>{{ book.book.categoria }}</p>
+        </div>
+        <hr>
+        <!-- Comments Form -->
+        @if (userLogged) {
+          <div class="card my-4">
+            <h5 class="card-header">Deja un comentario:</h5>
+            <div class="card-body">
+              <form [formGroup]="opinionForm" (ngSubmit)="saveOpinion(book.book.libro_Id)">
+                <div class="form-group">
+                  <input formControlName="comentario" type="text" class="form-control form-control-lg">
+                  @if (comment.invalid && (comment.dirty || comment.touched)) {
+                    <div class="text-danger">
+                      @if (comment.errors?.['required']) {
+                        <div>
+                          El comentario es requerido si intenta agregar una opinion.
+                        </div>
+                      }
+                      @if (comment.errors?.['minlength']) {
+                        <div>
+                          El comentario debe tener como mínimo 1 caracter.
+                        </div>
+                      }
+                    </div>
+                  }
+                  <label>Calificación</label>
+                  @for (i of [1, 2, 3, 4, 5]; track i) {
+                    <input class="form-check-input" type="radio" formControlName="calificacion" [value]="i"
+                           id="calificacion{{i}}">
+                    <label class="form-check-label" for="calificacion{{i}}">{{i}}</label>
+                  }
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+              </form>
+            </div>
+          </div>
+        } @else {
+          <p>Debes iniciar sesión para poder comentar</p>
+        }
+        <!-- Single Comment -->
+        @for (opinion of book.opiniones; track opinion.correo) {
+          <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <div class="media-body">
+              <h5 class="mt-0">{{ opinion.nombre_Usuario }}</h5>
+              {{ opinion.comentario }}
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

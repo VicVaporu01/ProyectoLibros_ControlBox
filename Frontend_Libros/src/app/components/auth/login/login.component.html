@@ -1,0 +1,36 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <p class="text-danger">{{loginError}}</p>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Correo</label>
+    <input formControlName="correo" type="email" class="form-control" id="exampleInputEmail1"
+           aria-describedby="emailHelp">
+    @if (email.invalid && (email.dirty || email.touched)) {
+      <div class="text-danger">
+        @if (email.errors?.['required']) {
+          <div>
+            El correo es requerido.
+          </div>
+        }
+        @if (email.errors?.['email']) {
+          <div>
+            El correo debe tener un formato válido.
+          </div>
+        }
+      </div>
+    }
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+    <input formControlName="clave" type="password" class="form-control" id="exampleInputPassword1">
+    @if (password.invalid && (password.dirty || password.touched)) {
+      <div class="text-danger">
+        @if (password.errors?.['required']) {
+          <div>
+            La contraseña es requerida.
+          </div>
+        }
+      </div>
+    }
+  </div>
+  <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+</form>
