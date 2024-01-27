@@ -21,7 +21,7 @@ export class BooksComponent {
   errorMessage: String = "";
   userLogged: boolean = false;
   user?: User;
-  private listaIdLibros: number[] = [1, 8, 12, 15, 19];
+  private listaIdLibros: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
   bookAndOpinion: BookAndOpinion[] = [];
   opinionForm = this.formBuilder.group({
     comentario: ['', [Validators.required, Validators.minLength(1)]],
